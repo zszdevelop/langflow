@@ -100,8 +100,14 @@ def run(
     ),
     timeout: int = typer.Option(300, help="Worker timeout in seconds."),
     port: int = typer.Option(7860, help="Port to listen on.", envvar="LANGFLOW_PORT"),
+    # TODO ZSZ
+    # components_path: Optional[Path] = typer.Option(
+    #     Path(__file__).parent / "components",
+    #     help="Path to the directory containing custom components.",
+    #     envvar="LANGFLOW_COMPONENTS_PATH",
+    # ),
     components_path: Optional[Path] = typer.Option(
-        Path(__file__).parent / "components",
+        Path(__file__).parent.parent / "llmops/components",
         help="Path to the directory containing custom components.",
         envvar="LANGFLOW_COMPONENTS_PATH",
     ),
@@ -132,12 +138,14 @@ def run(
     #     envvar="LANGFLOW_DATABASE_URL",
     # ),
     path: str = typer.Option(
-        None,
+        # None,
+        # zsz TODO
+        Path(__file__).parent.parent.parent / "front",
         help="Path to the frontend directory containing build files. This is for development purposes only.",
         envvar="LANGFLOW_FRONTEND_PATH",
     ),
     open_browser: bool = typer.Option(
-        True,
+        False,
         help="Open the browser after starting the server.",
         envvar="LANGFLOW_OPEN_BROWSER",
     ),
@@ -307,7 +315,7 @@ def run_langflow(host, port, log_level, options, app):
         sys.exit(1)
 
 
-@app.command()
+# @app.command()
 def superuser(
     username: str = typer.Option(..., prompt=True, help="Username for the superuser."),
     password: str = typer.Option(
@@ -341,7 +349,7 @@ def superuser(
             typer.echo("Superuser creation failed.")
 
 
-@app.command()
+# @app.command()
 def migration(test: bool = typer.Option(True, help="Run migrations in test mode.")):
     """
     Run or test migrations.
