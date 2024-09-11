@@ -107,7 +107,7 @@ def run(
     #     envvar="LANGFLOW_COMPONENTS_PATH",
     # ),
     components_path: Optional[Path] = typer.Option(
-        Path(__file__).parent.parent / "llmops/components",
+        Path(__file__).parent.parent / "llmextend/components",
         help="Path to the directory containing custom components.",
         envvar="LANGFLOW_COMPONENTS_PATH",
     ),
